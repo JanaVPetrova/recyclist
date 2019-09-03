@@ -10,6 +10,7 @@ gemspec
 gem 'telegram-bot-ruby'
 gem 'pg'
 gem 'sequel'
+gem 'rake'
 
 gem 'rom', '~> 4.0'
 gem 'rom-sql', '~> 2.0'

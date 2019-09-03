@@ -140,7 +140,7 @@ DEPENDENCIES
   dry-system
   pg
   pry-byebug
-  rake (~> 10.0)
+  rake
   recyclist!
   rom (~> 4.0)
   rom-sql (~> 2.0)
@@ -148,5 +148,8 @@ DEPENDENCIES
   sequel
   telegram-bot-ruby
 
+RUBY VERSION
+   ruby 2.6.4p104
+
 BUNDLED WITH
-   1.15.4
+   1.17.2
