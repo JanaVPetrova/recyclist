@@ -1,6 +1,22 @@
-require "bundler/gem_tasks"
-require "rspec/core/rake_task"
+# frozen_string_literal: true
 
-RSpec::Core::RakeTask.new(:spec)
+require 'bundler/setup'
+require_relative 'system/container'
 
-task :default => :spec
+begin
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new :spec
+  task default: [:spec]
+rescue LoadError
+  nil
+end
+
+Rake.add_rakelib 'lib/tasks'
+
+task :environment do
+  App.finalize!
+end
+
+task :settings do
+  App.start(:settings)
+end

@@ -1,5 +1,4 @@
-require "recyclist/version"
+# frozen_string_literal: true
 
 module Recyclist
-  # Your code goes here...
 end
