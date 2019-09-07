@@ -16,7 +16,7 @@ module Recyclist
     def start
       Telegram::Bot::Client.run(App[:settings].telegram_api_token) do |bot|
         bot.listen do |message|
-          logger.warn message.inspect
+          logger.warn message.text.inspect
 
           case message.text
           when /^\/start/
@@ -45,6 +45,7 @@ module Recyclist
               bot.api.send_message(chat_id: message.chat.id, text: "Yey! #{recyclist.nickname} joined!")
             end
           when /^\/i_quit/
+            logger.warn('XXX')
             recyclist = recyclists.by_user_id(message.from.id)
             recyclists.delete(recyclist.id)
             bot.api.send_message(chat_id: message.chat.id, text: "Recyclist #{recyclist.nickname} changed his/her mind =(")
