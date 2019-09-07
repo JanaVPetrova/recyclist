@@ -17,8 +17,8 @@ module Recyclist
           recyclists.where(chat_id: chat_id)
         end
 
-        def clear
-          recyclists.delete
+        def delete_all(chat_id)
+          recyclists.where(chat_id: chat_id).delete
         end
       end
     end

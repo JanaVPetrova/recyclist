@@ -70,7 +70,7 @@ module Recyclist
               bot.api.send_message(chat_id: message.chat.id, text: "Nobody is in =(")
             end
           when /^\/clear/
-            recyclists.delete_all
+            recyclists.delete_all(message.chat_id)
             bot.api.send_message(chat_id: message.chat.id, text: 'Recyclists list is empty.')
           end
         rescue StandardError => e
