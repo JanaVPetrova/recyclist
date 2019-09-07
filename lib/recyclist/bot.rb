@@ -15,14 +15,12 @@ module Recyclist
     def start
       Telegram::Bot::Client.run(App[:settings].telegram_api_token) do |bot|
         bot.listen do |message|
-          puts message.inspect
-
           case message.text
-          when /\/start/
+          when /^\/start$/
             text = "The next EcoTaxy arrives tomorrow. Type '/i_want' to participate, '/help' for more actions"
             bot.api.send_message(chat_id: message.chat.id, text: text)
-          when /\/help/
-            text = <<-TEXT
+          when /^\/help$/
+            text = <<~TEXT
               '/help' - see this message
               '/i_want' - participate in the upcoming Recycling Event
               '/i_quit' - cancel participation in the upcoming Recycling Event
@@ -31,7 +29,7 @@ module Recyclist
               '/clear' - [DANGEROUS] remove all participants from the upcoming Recycling Event.
             TEXT
             bot.api.send_message(chat_id: message.chat.id, text: text)
-          when /\/i_want .*/
+          when /^\/i_want$/
             if recyclists.by_user_id(message.from.id)
               bot.api.send_message(chat_id: message.chat.id, text: "Oops, you are already in")
             else
@@ -43,11 +41,11 @@ module Recyclist
               )
               bot.api.send_message(chat_id: message.chat.id, text: "Yey! #{recyclist.nickname} joined!")
             end
-          when /\/i_quit/
+          when /^\/i_quit$/
             recyclist = recyclists.by_user_id(message.from.id)
             recyclists.delete(recyclist.id)
             bot.api.send_message(chat_id: message.chat.id, text: "Recyclist #{recyclist.nickname} changed his/her mind =(")
-          when /\/announce .*/
+          when /^\/announce .*/
             match = message.text.match(/\/announce (?<announcement>.*)/)
             return unless match
 
@@ -58,7 +56,7 @@ module Recyclist
               service_data.create(key: 'main', payload: announcement)
             end
             bot.api.send_message(chat_id: message.chat.id, text: "Ok! #{announcement}")
-          when /\/whos_in/
+          when /^\/whos_in$/
             nicknames = recyclists.
               by_chat_id(message.chat.id).
               map { |recyclist| recyclist[:nickname] }
@@ -68,7 +66,7 @@ module Recyclist
             else
               bot.api.send_message(chat_id: message.chat.id, text: "Nobody is in =(")
             end
-          when /\/clear/
+          when /^\/clear$/
             recyclists.delete_all
             bot.api.send_message(chat_id: message.chat.id, text: 'Recyclists list is empty.')
           end
