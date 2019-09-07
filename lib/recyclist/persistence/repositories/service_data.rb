@@ -10,11 +10,11 @@ module Recyclist
         commands :create
 
         def by_key_and_chat_id(key, chat_id)
-          service_data.where(key: key.to_s, chat_id: chat_id).one
+          service_data.where(key: key.to_s, chat_id: chat_id.to_s).one
         end
 
         def update_key(key:, payload:, chat_id:)
-          service_data.where(key: key, chat_id: chat_id).update(payload: payload)
+          service_data.where(key: key, chat_id: chat_id.to_s).update(payload: payload)
         end
       end
     end
