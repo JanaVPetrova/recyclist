@@ -10,6 +10,7 @@ module Recyclist
     include Import[
       'recyclist.persistence.repositories.recyclists',
       'recyclist.persistence.repositories.service_data',
+      'recyclists.commands.i_want'
       'logger'
     ]
 
@@ -33,17 +34,8 @@ module Recyclist
             TEXT
             bot.api.send_message(chat_id: message.chat.id, text: text)
           when /^\/i_want/
-            if recyclists.by_user_id_and_chat_id(message.from.id, message.chat.id)
-              bot.api.send_message(chat_id: message.chat.id, text: "Oops, you are already in")
-            else
-              recyclist = recyclists.create(
-                user_id: message.from.id,
-                nickname: message.from.username,
-                chat_id: message.chat.id,
-                uuid: SecureRandom.uuid
-              )
-              bot.api.send_message(chat_id: message.chat.id, text: "Yey! #{recyclist.nickname} joined!")
-            end
+            response = i_want.call(message)
+            bot.api.send_message(chat_id: message.chat.id, text: response)
           when /^\/i_quit/
             recyclist = recyclists.by_user_id_and_chat_id(message.from.id, message.chat.id)
             recyclists.delete(recyclist.id)
