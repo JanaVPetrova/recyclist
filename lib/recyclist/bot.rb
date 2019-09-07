@@ -11,6 +11,8 @@ module Recyclist
       'recyclist.persistence.repositories.recyclists',
       'recyclist.persistence.repositories.service_data',
       'recyclist.commands.i_want',
+      'recyclist.commands.i_quit',
+      'recyclist.commands.clear',
       'logger'
     ]
 
@@ -37,9 +39,8 @@ module Recyclist
             response = i_want.call(message)
             bot.api.send_message(chat_id: message.chat.id, text: response)
           when /^\/i_quit/
-            recyclist = recyclists.by_user_id_and_chat_id(message.from.id, message.chat.id)
-            recyclists.delete(recyclist.id)
-            bot.api.send_message(chat_id: message.chat.id, text: "Recyclist #{recyclist.nickname} changed his/her mind =(")
+            response = i_quit.call(message)
+            bot.api.send_message(chat_id: message.chat.id, text: response)
           when /^\/announce .*/
             match = message.text.match(/\/announce (?<announcement>.*)/)
             return unless match
@@ -62,8 +63,8 @@ module Recyclist
               bot.api.send_message(chat_id: message.chat.id, text: "Nobody is in =(")
             end
           when /^\/clear/
-            recyclists.delete_all(message.chat_id)
-            bot.api.send_message(chat_id: message.chat.id, text: 'Recyclists list is empty.')
+            response = clear.call(message)
+            bot.api.send_message(chat_id: message.chat.id, text: response)
           end
         rescue StandardError => e
           puts e.inspect
