@@ -14,7 +14,7 @@ module Recyclist
         return unless match
 
         announcement = match['announcement']
-        if service_data.by_key('main')
+        if service_data.by_key_and_chat_id('main', message.chat.id)
           service_data.update_key(key: 'main', chat_id: message.chat.id, payload: announcement)
         else
           service_data.create(key: 'main', chat_id: message.chat.id, payload: announcement)

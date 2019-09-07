@@ -9,8 +9,8 @@ module Recyclist
       class ServiceData < Recyclist::Repository[:service_data]
         commands :create
 
-        def by_key(key)
-          service_data.where(key: key.to_s).one
+        def by_key_and_chat_id(key, chat_id)
+          service_data.where(key: key.to_s, chat_id: chat_id).one
         end
 
         def update_key(key:, payload:, chat_id:)

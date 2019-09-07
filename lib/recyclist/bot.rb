@@ -12,6 +12,7 @@ module Recyclist
       'recyclist.commands.i_quit',
       'recyclist.commands.whos_in',
       'recyclist.commands.announce',
+      'recyclist.commands.see_announcement',
       'recyclist.commands.clear',
       'logger'
     ]
