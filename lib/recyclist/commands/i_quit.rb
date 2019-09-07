@@ -15,7 +15,7 @@ module Recyclist
           recyclists.delete(recyclist.id)
           "Recyclist #{recyclist.nickname} changed his/her mind =("
         else
-          "Recyclist #{recyclist.nickname} was not in the list anyway =/ "
+          "Recyclist #{message.from.username} was not in the list anyway =/ "
         end
       end
     end

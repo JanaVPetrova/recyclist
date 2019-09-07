@@ -26,7 +26,7 @@ RSpec.describe Recyclist::Commands::IQuit do
     end
   end
 
-  context 'when recyclist doen not exist' do
+  context 'when recyclist does not exist' do
     it 'does nothing' do
       expect { i_quit }.not_to raise_error
     end
