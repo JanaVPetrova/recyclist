@@ -9,11 +9,14 @@ module Recyclist
   class Bot
     include Import[
       'recyclist.persistence.repositories.recyclists',
-      'recyclist.persistence.repositories.service_data'
+      'recyclist.persistence.repositories.service_data',
+      'logger'
     ]
 
     def start
       Telegram::Bot::Client.run(App[:settings].telegram_api_token) do |bot|
+        logger.warn message.inspect
+
         bot.listen do |message|
           case message.text
           when /^\/start$/
@@ -70,6 +73,8 @@ module Recyclist
             recyclists.delete_all
             bot.api.send_message(chat_id: message.chat.id, text: 'Recyclists list is empty.')
           end
+        rescue StandardError => e
+          logger.error e.inspect
         end
       end
     end
