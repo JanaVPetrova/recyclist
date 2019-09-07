@@ -13,8 +13,8 @@ module Recyclist
           service_data.where(key: key.to_s).one
         end
 
-        def update_key(key:, payload:)
-          service_data.where(key: key).update(payload: payload)
+        def update_key(key:, payload:, chat_id:)
+          service_data.where(key: key, chat_id: chat_id).update(payload: payload)
         end
       end
     end
