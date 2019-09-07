@@ -19,7 +19,7 @@ module Recyclist
             chat_id: message.chat.id,
             uuid: SecureRandom.uuid
           )
-          'Yey! #{recyclist.nickname} joined!'
+          "Yey! #{recyclist.nickname} joined!"
         end
       end
     end
