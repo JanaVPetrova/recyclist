@@ -33,7 +33,7 @@ module Recyclist
             TEXT
             bot.api.send_message(chat_id: message.chat.id, text: text)
           when /^\/i_want/
-            if recyclists.by_user_id(message.from.id)
+            if recyclists.by_user_id_and_chat_id(message.from.id, message.chat.id)
               bot.api.send_message(chat_id: message.chat.id, text: "Oops, you are already in")
             else
               recyclist = recyclists.create(
