@@ -15,9 +15,9 @@ module Recyclist
 
     def start
       Telegram::Bot::Client.run(App[:settings].telegram_api_token) do |bot|
-        logger.warn message.inspect
-
         bot.listen do |message|
+          logger.warn message.inspect
+
           case message.text
           when /^\/start$/
             text = "The next EcoTaxy arrives tomorrow. Type '/i_want' to participate, '/help' for more actions"
