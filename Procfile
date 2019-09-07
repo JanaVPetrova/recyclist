@@ -1,1 +1,1 @@
-web: bundle exec rake db:migrate && bundle exec ./bin/start
+worker: bundle exec rake db:migrate && bundle exec ./bin/start
