@@ -32,7 +32,7 @@ module Recyclist
           when /^\/whos_in/
             response = whos_in.call(message)
             bot.api.send_message(chat_id: message.chat.id, text: response)
-          when /^\/announce .*/
+          when /^\/announce.*/
             response = announce.call(message)
             bot.api.send_message(chat_id: message.chat.id, text: response)
           when /\/see_announcement/
