@@ -45,8 +45,7 @@ module Recyclist
               bot.api.send_message(chat_id: message.chat.id, text: "Yey! #{recyclist.nickname} joined!")
             end
           when /^\/i_quit/
-            logger.warn('XXX')
-            recyclist = recyclists.by_user_id(message.from.id)
+            recyclist = recyclists.by_user_id_and_chat_id(message.from.id, message.chat.id)
             recyclists.delete(recyclist.id)
             bot.api.send_message(chat_id: message.chat.id, text: "Recyclist #{recyclist.nickname} changed his/her mind =(")
           when /^\/announce .*/
@@ -75,6 +74,7 @@ module Recyclist
             bot.api.send_message(chat_id: message.chat.id, text: 'Recyclists list is empty.')
           end
         rescue StandardError => e
+          puts e.inspect
           logger.error e.inspect
         end
       end
