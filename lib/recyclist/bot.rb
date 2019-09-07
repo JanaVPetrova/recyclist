@@ -10,7 +10,7 @@ module Recyclist
     include Import[
       'recyclist.persistence.repositories.recyclists',
       'recyclist.persistence.repositories.service_data',
-      'recyclists.commands.i_want'
+      'recyclists.commands.i_want',
       'logger'
     ]
 
