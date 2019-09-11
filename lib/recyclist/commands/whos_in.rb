@@ -16,7 +16,7 @@ module Recyclist
         nicknames = recyclists.
           by_chat_id(message.chat.id).
           map do |recyclist|
-            full_name = recyclist.full_name.any? ? "(#{recyclist.full_name})" : nil
+            full_name = recyclist.full_name ? "(#{recyclist.full_name})" : nil
             [recyclist[:nickname], full_name].compact.join(' ')
           end
 
