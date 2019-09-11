@@ -26,7 +26,7 @@ RSpec.describe Recyclist::Commands::Announce do
     it 'changes its payload' do
       announce
 
-      expect(main_data).to eq(chat_id: message.chat.id, payload: announcement)
+      expect(main_data).to eq(chat_id: message.chat.id.to_s, payload: announcement)
     end
   end
 
@@ -34,7 +34,7 @@ RSpec.describe Recyclist::Commands::Announce do
     it 'changes its payload' do
       announce
 
-      expect(main_data).to eq(chat_id: message.chat.id, payload: announcement)
+      expect(main_data).to eq(chat_id: message.chat.id.to_s, payload: announcement)
     end
   end
 end

@@ -16,10 +16,11 @@ module Recyclist
           recyclist = recyclists.create(
             user_id: message.from.id,
             nickname: message.from.username,
+            full_name: [message.from.first_name, message.from.last_name].join(' '),
             chat_id: message.chat.id,
             uuid: SecureRandom.uuid
           )
-          "Yey! #{recyclist.nickname} joined!"
+          "Yey! #{recyclist.nickname} joined! Now #{recyclists.by_chat_id(message.chat.id).count} people are in"
         end
       end
     end

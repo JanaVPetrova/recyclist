@@ -8,7 +8,8 @@ module Persistence
         attribute :user_id, Types::Int
         attribute :chat_id, Types::Int
         attribute :uuid, Types::String
-        attribute :nickname, Types::Int.optional
+        attribute :nickname, Types::String.optional
+        attribute :full_name, Types::String.optional
       end
     end
   end
