@@ -16,15 +16,22 @@ module Recyclist
         nicknames = recyclists.
           by_chat_id(message.chat.id).
           map do |recyclist|
-            full_name = recyclist.full_name ? "(#{recyclist.full_name})" : nil
+            full_name = present?(recyclist[:full_name]) ? "(#{recyclist[:full_name]})" : nil
             [recyclist[:nickname], full_name].compact.join(' ')
           end
 
         if nicknames.any?
-          "#{nicknames.count} people are in:\n#{nicknames.join("\n")}\n\n#{MAGIC_PRICE / nicknames.count} RUB per person"
+          "#{nicknames.count} people are in:\n#{nicknames.join("\n")} \
+          \n\n#{(MAGIC_PRICE / nicknames.count).to_s('F')} RUB per person"
         else
           'Nobody is in =('
         end
+      end
+
+      private
+
+      def present?(value)
+        !value.nil? && value != ''
       end
     end
   end
