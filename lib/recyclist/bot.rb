@@ -3,7 +3,6 @@
 require 'telegram/bot'
 require 'import'
 require 'securerandom'
-require 'pry-byebug'
 
 module Recyclist
   class Bot
@@ -43,7 +42,6 @@ module Recyclist
             bot.api.send_message(chat_id: message.chat.id, text: response)
           end
         rescue StandardError => e
-          puts e.inspect
           logger.error e.inspect
         end
       end
