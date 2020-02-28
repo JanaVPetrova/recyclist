@@ -21,8 +21,7 @@ module Recyclist
           end
 
         if nicknames.any?
-          "#{nicknames.count} people are in:\n#{nicknames.join("\n")} \
-          \n\n#{(MAGIC_PRICE / nicknames.count).truncate(2).to_s('F')} RUB per person"
+          "#{nicknames.count} people are in:\n#{nicknames.join("\n")}"
         else
           'Nobody is in =('
         end
